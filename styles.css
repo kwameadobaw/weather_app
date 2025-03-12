@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 470px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.search-wrapper input {
+    background: #2d2d2d;
+    color: #ffffff;
+    border: 1px solid #404040;
+}
+
+.search-wrapper label {
+    background: #1e1e1e;
+    color: #888;
+}
+
+.suggestions {
+    background: #2d2d2d;
+    border: 1px solid #404040;
+}
+
+.suggestions li {
+    border-bottom: 1px solid #404040;
+    color: #ffffff;
+}
+
+.suggestions li:hover {
+    background: #3d3d3d;
+}
+
+.search-wrapper input:focus,
+.search-wrapper input:not(:placeholder-shown) {
+    border-color: #00feba;
+}
+
+.search-wrapper input:focus ~ label,
+.search-wrapper input:not(:placeholder-shown) ~ label {
+    color: #00feba;
+}
+
+.search-box button {
+    background: #00feba;
+    color: #1e1e1e;
+}
+
+.search-box button:hover {
+    background: #00d4a0;
+}
+
+.additional-info {
+    color: #888;
+}
+.search-box {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background: transparent;
+    transition: border-color 0.3s ease;
+}
+
+.search-wrapper label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #1e1e1e;
+    padding: 0 0.25rem;
+    color: #888;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.search-wrapper input:focus ~ label,
+.search-wrapper input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 0.8rem;
+    color: #00feba;
+}
+
+.search-wrapper input:focus,
+.search-wrapper input:not(:placeholder-shown) {
+    border-color: #5b548a;
+    outline: none;
+}
+
+.search-wrapper input:focus ~ label,
+.search-wrapper input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 0.8rem;
+    color: #5b548a;
+}
+
+.search-wrapper input::placeholder {
+    color: transparent;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.suggestions li {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.suggestions li:last-child {
+    border-bottom: none;
+}
+
+.suggestions li:hover {
+    background: #f0f0f0;
+}
+
+
+.search-box button {
+    padding: 0.5rem 1rem;
+    background: #5b548a;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.weather-info {
+    text-align: center;
+}
+
+.weather-details {
+    margin: 2rem 0;
+}
+
+.weather-details img {
+    width: 100px;
+}
+
+.weather-details h1 {
+    font-size: 3rem;
+    margin: 1rem 0;
+}
+
+.additional-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
