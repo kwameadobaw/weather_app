@@ -133,30 +133,41 @@ body {
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background: #1e1e1e;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     list-style: none;
     max-height: 200px;
     overflow-y: auto;
     display: none;
     z-index: 1000;
     margin-top: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid #404040;
 }
 
 .suggestions li {
     padding: 0.75rem 1rem;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #404040;
+    color: #ffffff;
+}
+
+.suggestions li:hover {
+    background: #2d2d2d;
+    color: #ffffff;
 }
 
 .suggestions li:last-child {
     border-bottom: none;
 }
 
+
 .suggestions li:hover {
-    background: #f0f0f0;
+         background: #f0f0f0;
+ }
+
+.suggestions li:hover {
+    background: #333333;
 }
 
 
