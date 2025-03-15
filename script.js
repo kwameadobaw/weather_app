@@ -14,6 +14,9 @@ async function getWeatherData(city) {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
         const data = await response.json();
         updateWeatherInfo(data);
+        
+        // Add this line to fetch forecast
+        await getForecastData(city);
     } catch (error) {
         console.error('Error:', error);
         cityName.textContent = 'City not found';
@@ -26,6 +29,9 @@ async function getWeatherByLocation(lat, lon) {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
         const data = await response.json();
         updateWeatherInfo(data);
+        
+        // Add this line to fetch forecast
+        await getForecastByLocation(lat, lon);
     } catch (error) {
         console.error('Error:', error);
         cityName.textContent = 'Location not found';
@@ -133,3 +139,60 @@ document.addEventListener('click', (e) => {
         suggestionsContainer.style.display = 'none';
     }
 });
+
+// Add this function to fetch forecast data
+async function getForecastData(city) {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`);
+        const data = await response.json();
+        updateForecastInfo(data);
+    } catch (error) {
+        console.error('Error fetching forecast:', error);
+    }
+}
+
+// Add this function to fetch forecast data by coordinates
+async function getForecastByLocation(lat, lon) {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
+        const data = await response.json();
+        updateForecastInfo(data);
+    } catch (error) {
+        console.error('Error fetching forecast:', error);
+    }
+}
+
+// Add this function to update forecast information
+function updateForecastInfo(data) {
+    const forecastContainer = document.getElementById('forecast-items');
+    forecastContainer.innerHTML = '';
+    
+    // Get tomorrow's date
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowDate = tomorrow.toISOString().split('T')[0];
+    
+    // Filter forecast data for tomorrow
+    const tomorrowForecasts = data.list.filter(item => {
+        return item.dt_txt.includes(tomorrowDate);
+    });
+    
+    // Create forecast items
+    tomorrowForecasts.forEach(forecast => {
+        const time = forecast.dt_txt.split(' ')[1].substring(0, 5);
+        const temp = Math.round(forecast.main.temp);
+        const description = forecast.weather[0].description;
+        const icon = forecast.weather[0].icon;
+        
+        const forecastItem = document.createElement('div');
+        forecastItem.classList.add('forecast-item');
+        forecastItem.innerHTML = `
+            <div class="time">${time}</div>
+            <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}">
+            <div class="temp">${temp}°C</div>
+            <div class="desc">${description}</div>
+        `;
+        
+        forecastContainer.appendChild(forecastItem);
+    });
+}
